@@ -1,0 +1,4 @@
+*.jpg
+*.png
+.dart_tool/
+.packages
