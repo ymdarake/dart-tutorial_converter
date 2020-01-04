@@ -1,5 +1,7 @@
+import 'package:converter/src/converter.dart';
 import 'package:prompter_ymdarake/prompter_ymdarake.dart';
 import 'dart:io';
+import 'package:convert/convert.dart';
 
 void main() {
   final prompter = Prompter();
@@ -11,6 +13,14 @@ void main() {
   final format = prompter.askMultiple('Select format:', buildFormatOptions());
   final selectedFile =
       prompter.askMultiple('Select an image to convert:', buildFileOptions());
+
+  final newPath = convertImage(selectedFile, format);
+
+  final shoulOpen = prompter.askBinary('Open the image?');
+
+  if (shoulOpen) {
+    Process.run('open', [newPath]);
+  }
 }
 
 List<Option> buildFormatOptions() {
